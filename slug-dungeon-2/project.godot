@@ -24,6 +24,8 @@ enabled=PackedStringArray("res://addons/softbody2d/plugin.cfg")
 folder_colors={
 "res://addons/": "orange",
 "res://assets/": "red",
+"res://assets/Player/": "blue",
+"res://assets/Sounds/": "teal",
 "res://samples/": "orange",
 "res://scripts/": "yellow"
 }
