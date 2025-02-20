@@ -1,9 +1,13 @@
-[gd_scene load_steps=59 format=3 uid="uid://bc626pe7caemo"]
+[gd_scene load_steps=63 format=3 uid="uid://bc626pe7caemo"]
 
 [ext_resource type="Script" path="res://scripts/Player_move.gd" id="1_12l3o"]
 [ext_resource type="Texture2D" uid="uid://bauu1ffa68cs8" path="res://assets/Player/slug.png" id="2_sarpv"]
 [ext_resource type="Script" path="res://addons/softbody2d/softbody2d.gd" id="3_nvep6"]
 [ext_resource type="Texture2D" uid="uid://d4lkwni1fiw7c" path="res://assets/Player/slug - Copy.png" id="4_dpi3m"]
+[ext_resource type="AudioStream" uid="uid://boya05rm035ec" path="res://assets/Sounds/jump_41g16G8A.mp3" id="5_fp1vq"]
+[ext_resource type="AudioStream" uid="uid://cgl3k2xgokbub" path="res://assets/Sounds/charge_JCiJIkR7.mp3" id="6_01qgf"]
+[ext_resource type="AudioStream" uid="uid://cdu8kklatv2kl" path="res://assets/Sounds/walking.mp3" id="7_nyddh"]
+[ext_resource type="AudioStream" uid="uid://crt5he3ygvg5o" path="res://assets/Sounds/cartoon-splat-sound-effect_gRUUlUrb.mp3" id="8_goj0b"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_conrc"]
 radius = 23.933
@@ -412,13 +416,17 @@ size = Vector2(3, 3)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_evvij"]
 size = Vector2(183, 81)
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("head_nodes_right", "head_nodes_left", "bodyRight", "bodyLeft", "right_facing_softbody", "left_facing_softbody", "PinRightOne", "PinRightTwo", "PinLeftOne", "PinLeftTwo") groups=["Player"]]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("jump_sound", "charge_sound", "walk_sound", "splat_sound", "head_nodes_right", "head_nodes_left", "bodyRight", "bodyLeft", "right_facing_softbody", "left_facing_softbody", "PinRightOne", "PinRightTwo", "PinLeftOne", "PinLeftTwo") groups=["Player"]]
 position = Vector2(419, 268)
 collision_layer = 2
 collision_mask = 2
 floor_stop_on_slope = false
 floor_block_on_wall = false
 script = ExtResource("1_12l3o")
+jump_sound = NodePath("Jump")
+charge_sound = NodePath("Charge")
+walk_sound = NodePath("Walk")
+splat_sound = NodePath("Splat")
 head_nodes_right = [NodePath("SoftBodyRight/Bone-1"), NodePath("SoftBodyRight/Bone-4"), NodePath("SoftBodyRight/Bone-7"), NodePath("SoftBodyRight/Bone-10"), NodePath("SoftBodyRight/Bone-11"), NodePath("SoftBodyRight/Bone-12"), NodePath("SoftBodyRight/Bone-13"), NodePath("SoftBodyRight/Bone-14"), NodePath("SoftBodyRight/Bone-15"), NodePath("SoftBodyRight/Bone-16"), NodePath("SoftBodyRight/Bone-17"), NodePath("SoftBodyRight/Bone-18"), NodePath("SoftBodyRight/Bone-19"), NodePath("SoftBodyRight/Bone-20"), NodePath("SoftBodyRight/Bone-21"), NodePath("SoftBodyRight/Bone-22")]
 head_nodes_left = [NodePath("SoftBodyLeft/Bone-0"), NodePath("SoftBodyLeft/Bone-1"), NodePath("SoftBodyLeft/Bone-2"), NodePath("SoftBodyLeft/Bone-3"), NodePath("SoftBodyLeft/Bone-4"), NodePath("SoftBodyLeft/Bone-5"), NodePath("SoftBodyLeft/Bone-6"), NodePath("SoftBodyLeft/Bone-7"), NodePath("SoftBodyLeft/Bone-8"), NodePath("SoftBodyLeft/Bone-9"), NodePath("SoftBodyLeft/Bone-10"), NodePath("SoftBodyLeft/Bone-11"), NodePath("SoftBodyLeft/Bone-12"), NodePath("SoftBodyLeft/Bone-13"), NodePath("SoftBodyLeft/Bone-16"), NodePath("SoftBodyLeft/Bone-17"), NodePath("SoftBodyLeft/Bone-19")]
 bodyRight = NodePath("SoftBodyRight/Bone-0")
@@ -3849,3 +3857,19 @@ visible = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 position = Vector2(0.5, -20.5)
 shape = SubResource("RectangleShape2D_evvij")
+
+[node name="Jump" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("5_fp1vq")
+volume_db = 5.0
+
+[node name="Charge" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_01qgf")
+
+[node name="Walk" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("7_nyddh")
+volume_db = 3.0
+parameters/looping = true
+
+[node name="Splat" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_goj0b")
+volume_db = -25.0

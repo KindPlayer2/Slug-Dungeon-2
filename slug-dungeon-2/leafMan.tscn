@@ -1,11 +1,11 @@
-[gd_scene load_steps=19 format=3 uid="uid://mt3n5mdme4yk"]
+[gd_scene load_steps=20 format=3 uid="uid://mt3n5mdme4yk"]
 
 [ext_resource type="Script" path="res://leaf_man.gd" id="1_inaip"]
-[ext_resource type="Texture2D" uid="uid://bbfbpcfkrgncv" path="res://assets/leafman.png" id="1_y5pic"]
+[ext_resource type="Texture2D" uid="uid://bbfbpcfkrgncv" path="res://assets/enemies/leafman.png" id="1_y5pic"]
 [ext_resource type="Script" path="res://leafMan.gd" id="2_khhyd"]
 [ext_resource type="AudioStream" uid="uid://duhks7l3ejmih" path="res://assets/Sounds/leafmanvoice.mp3" id="4_rbxyd"]
 [ext_resource type="AudioStream" uid="uid://nt0pu0srxqen" path="res://assets/Sounds/leafmandeath_AY13gqEK.mp3" id="5_0jgif"]
-[ext_resource type="Texture2D" uid="uid://ctn8u4nxu7cw6" path="res://assets/deadLeaf.png" id="6_ycmsm"]
+[ext_resource type="Texture2D" uid="uid://ctn8u4nxu7cw6" path="res://assets/enemies/deadLeaf.png" id="6_ycmsm"]
 [ext_resource type="Texture2D" uid="uid://1sufbmp4ij0q" path="res://assets/redpix.png" id="7_gk04c"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p21q4"]
@@ -32,13 +32,19 @@ animations = [{
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_345mj"]
 
-[sub_resource type="CurveTexture" id="CurveTexture_yf2ug"]
+[sub_resource type="Curve" id="Curve_ljkg7"]
+max_value = 200.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_03pro"]
+curve = SubResource("Curve_ljkg7")
 
 [sub_resource type="Gradient" id="Gradient_311hm"]
 offsets = PackedFloat32Array(0, 0.153846, 0.897436, 0.953846, 1)
 colors = PackedColorArray(0.890196, 0, 0, 0, 0.507244, 1.26945e-06, 1.92523e-07, 1, 0.266116, 0, 0.0360788, 1, 0.247059, 0, 0.0352941, 0.760784, 0.231373, 0, 0.0352941, 0.411765)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_dfgke"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_fh6rv"]
 gradient = SubResource("Gradient_311hm")
 
 [sub_resource type="Curve" id="Curve_dyjrs"]
@@ -46,7 +52,7 @@ max_value = 100.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_hb2q0"]
+[sub_resource type="CurveTexture" id="CurveTexture_cruxw"]
 width = 400
 curve = SubResource("Curve_dyjrs")
 
@@ -60,12 +66,12 @@ angular_velocity_max = 255.75
 gravity = Vector3(0, 0, 0)
 damping_min = 300.0
 damping_max = 300.0
-damping_curve = SubResource("CurveTexture_hb2q0")
+damping_curve = SubResource("CurveTexture_cruxw")
 scale_over_velocity_max = 463.32
-color_ramp = SubResource("GradientTexture1D_dfgke")
+color_ramp = SubResource("GradientTexture1D_fh6rv")
 anim_speed_min = 6.42
 anim_speed_max = 6.42
-anim_speed_curve = SubResource("CurveTexture_yf2ug")
+anim_speed_curve = SubResource("CurveTexture_03pro")
 anim_offset_min = 0.4595
 anim_offset_max = 0.4595
 
@@ -75,7 +81,7 @@ anim_offset_max = 0.4595
 script = ExtResource("1_inaip")
 
 [node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("animated_sprite", "death_sprite", "looping_sound", "death_sound", "death_particle")]
-scale = Vector2(3, 3)
+scale = Vector2(5, 5)
 collision_layer = 4088
 collision_mask = 9
 script = ExtResource("2_khhyd")

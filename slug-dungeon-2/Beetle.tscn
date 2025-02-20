@@ -1,0 +1,208 @@
+[gd_scene load_steps=28 format=3 uid="uid://bhucm15pwwnoi"]
+
+[ext_resource type="Script" path="res://Beetle.gd" id="1_wggy3"]
+[ext_resource type="Texture2D" uid="uid://cdpjnyalm50il" path="res://assets/enemies/BeetleIdle.png" id="2_r7cmb"]
+[ext_resource type="Texture2D" uid="uid://c1u0s711orlgu" path="res://assets/enemies/BeetleAttack.png" id="3_2ux55"]
+[ext_resource type="Texture2D" uid="uid://1sufbmp4ij0q" path="res://assets/redpix.png" id="4_0v0d7"]
+[ext_resource type="Texture2D" uid="uid://d3vk3vsrui3u" path="res://assets/enemies/deadBeetle.png" id="5_3uaod"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_tyjh5"]
+atlas = ExtResource("2_r7cmb")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2utkr"]
+atlas = ExtResource("2_r7cmb")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_43x16"]
+atlas = ExtResource("3_2ux55")
+region = Rect2(0, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_08oew"]
+atlas = ExtResource("3_2ux55")
+region = Rect2(64, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rgw8e"]
+atlas = ExtResource("3_2ux55")
+region = Rect2(128, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k2wr3"]
+atlas = ExtResource("3_2ux55")
+region = Rect2(192, 0, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_nodf3"]
+atlas = ExtResource("3_2ux55")
+region = Rect2(0, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_itxau"]
+atlas = ExtResource("3_2ux55")
+region = Rect2(64, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_568bb"]
+atlas = ExtResource("3_2ux55")
+region = Rect2(128, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_6jet6"]
+atlas = ExtResource("3_2ux55")
+region = Rect2(192, 32, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rybjn"]
+atlas = ExtResource("3_2ux55")
+region = Rect2(0, 64, 64, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_uao7a"]
+atlas = ExtResource("3_2ux55")
+region = Rect2(64, 64, 64, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_wwqnf"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_tyjh5")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_2utkr")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 2.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_43x16")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_08oew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rgw8e")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k2wr3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_nodf3")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_itxau")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_568bb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_6jet6")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rybjn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_uao7a")
+}],
+"loop": false,
+"name": &"new_animation",
+"speed": 12.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rnbju"]
+size = Vector2(31.4, 25.6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8m33o"]
+size = Vector2(23.3, 30.4)
+
+[sub_resource type="Curve" id="Curve_8xqqr"]
+max_value = 200.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_ottbv"]
+curve = SubResource("Curve_8xqqr")
+
+[sub_resource type="Gradient" id="Gradient_pxuou"]
+offsets = PackedFloat32Array(0, 0.153846, 0.897436, 0.953846, 1)
+colors = PackedColorArray(0.890196, 0, 0, 0, 0.507244, 1.26945e-06, 1.92523e-07, 1, 0.266116, 0, 0.0360788, 1, 0.247059, 0, 0.0352941, 0.760784, 0.231373, 0, 0.0352941, 0.411765)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_gnjbl"]
+gradient = SubResource("Gradient_pxuou")
+
+[sub_resource type="Curve" id="Curve_k7a3n"]
+max_value = 100.0
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
+point_count = 3
+
+[sub_resource type="CurveTexture" id="CurveTexture_o7oc7"]
+width = 400
+curve = SubResource("Curve_k7a3n")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_f7fn6"]
+lifetime_randomness = 1.0
+direction = Vector3(0, 0, 0)
+spread = 180.0
+initial_velocity_max = 250.0
+angular_velocity_min = -1.60933e-05
+angular_velocity_max = 255.75
+gravity = Vector3(0, 0, 0)
+damping_min = 300.0
+damping_max = 300.0
+damping_curve = SubResource("CurveTexture_o7oc7")
+scale_over_velocity_max = 463.32
+color_ramp = SubResource("GradientTexture1D_gnjbl")
+anim_speed_min = 6.42
+anim_speed_max = 6.42
+anim_speed_curve = SubResource("CurveTexture_ottbv")
+anim_offset_min = 0.4595
+anim_offset_max = 0.4595
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("animated_sprite", "death_particle", "death_sprite")]
+position = Vector2(21, 14)
+scale = Vector2(5, 5)
+collision_layer = 8
+collision_mask = 9
+script = ExtResource("1_wggy3")
+animated_sprite = NodePath("AnimatedSprite2D")
+death_particle = NodePath("GPUParticles2D")
+death_sprite = NodePath("Sprite2D")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
+position = Vector2(16, 18.8)
+sprite_frames = SubResource("SpriteFrames_wwqnf")
+animation = &"idle"
+frame_progress = 0.586606
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D"]
+position = Vector2(16.3, 18.4)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_rnbju")
+
+[node name="Attack" type="Area2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Attack"]
+position = Vector2(4, 11.8)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_8m33o")
+
+[node name="Weakness" type="Area2D" parent="CharacterBody2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CharacterBody2D/Weakness"]
+position = Vector2(27.8, 15.8)
+scale = Vector2(1, 1)
+shape = SubResource("RectangleShape2D_8m33o")
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="CharacterBody2D"]
+position = Vector2(16.6667, 18)
+emitting = false
+amount = 1000
+process_material = SubResource("ParticleProcessMaterial_f7fn6")
+texture = ExtResource("4_0v0d7")
+lifetime = 3.0
+one_shot = true
+speed_scale = 2.0
+explosiveness = 1.0
+randomness = 0.3
+
+[node name="Sprite2D" type="Sprite2D" parent="CharacterBody2D"]
+position = Vector2(17, 18.8)
+texture = ExtResource("5_3uaod")
+
+[connection signal="area_entered" from="CharacterBody2D/Attack" to="CharacterBody2D" method="_on_attack_area_entered"]

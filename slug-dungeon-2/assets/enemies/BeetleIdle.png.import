@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://ctn8u4nxu7cw6"
-path="res://.godot/imported/deadLeaf.png-40aa965cabe40f6918dc8f673bb314e3.ctex"
+uid="uid://cdpjnyalm50il"
+path="res://.godot/imported/BeetleIdle.png-cb16bf400b004da12186650bd9230a6a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/deadLeaf.png"
-dest_files=["res://.godot/imported/deadLeaf.png-40aa965cabe40f6918dc8f673bb314e3.ctex"]
+source_file="res://assets/enemies/BeetleIdle.png"
+dest_files=["res://.godot/imported/BeetleIdle.png-cb16bf400b004da12186650bd9230a6a.ctex"]
 
 [params]
 

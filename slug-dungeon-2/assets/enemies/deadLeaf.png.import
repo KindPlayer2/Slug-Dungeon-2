@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bbfbpcfkrgncv"
-path="res://.godot/imported/leafman.png-3b0d1f5c0d707e74df68b86fe8223e69.ctex"
+uid="uid://ctn8u4nxu7cw6"
+path="res://.godot/imported/deadLeaf.png-6d1dd561e675c386b253cb27be0a53d9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/leafman.png"
-dest_files=["res://.godot/imported/leafman.png-3b0d1f5c0d707e74df68b86fe8223e69.ctex"]
+source_file="res://assets/enemies/deadLeaf.png"
+dest_files=["res://.godot/imported/deadLeaf.png-6d1dd561e675c386b253cb27be0a53d9.ctex"]
 
 [params]
 
