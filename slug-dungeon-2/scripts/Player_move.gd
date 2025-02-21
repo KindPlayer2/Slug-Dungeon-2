@@ -20,6 +20,8 @@ var is_in_air := false
 @export var charge_sound: AudioStreamPlayer2D
 @export var walk_sound: AudioStreamPlayer2D
 @export var splat_sound: AudioStreamPlayer2D
+@export var dead_sound: AudioStreamPlayer2D
+@export var hurt_sound: AudioStreamPlayer2D
 
 # Reference to the head RigidBody2D nodes
 @export var head_nodes_right: Array[RigidBody2D]
@@ -46,16 +48,26 @@ var head_left_original_positions: Array[Vector2]
 @export var PinLeftOne: PinJoint2D
 @export var PinLeftTwo: PinJoint2D
 
+@export var death_particle: GPUParticles2D
+@export var splat_particle: GPUParticles2D
+
+@onready var health_bar: ProgressBar = $HealthBar
+
 # Track whether the player was on the wall in the previous frame
 var was_on_wall := false
 
 # Store the last wall tangent for smooth momentum transition
 var _last_wall_tangent: Vector2
 
+# Track whether the player is alive
+var is_alive := true
+
 func _input(event: InputEvent) -> void:
-	if event.is_action_pressed("Rotate"):
-		# reset_player()
-		pass
+	if not is_alive:
+		return  # Ignore input if the player is dead
+
+	if event.is_action_pressed("Rotate") and health > 0:
+		dead_sound.play()
 
 var initial_body_right_position: Vector2
 var initial_body_right_velocity: Vector2
@@ -66,15 +78,16 @@ var initial_pin_right_two_node_b: NodePath
 var initial_pin_left_one_node_b: NodePath
 var initial_pin_left_two_node_b: NodePath
 
+var health = 6
+
 func _ready():
-	# Make player visible
+	health_bar.init_health(health)
 	set_player_visible(true)
 
 	# Assign the heads' original positions
 	head_right_original_positions = []
 	head_left_original_positions = []
 
-	# 2 for loops to assign head bone positions
 	for node in head_nodes_right:
 		head_right_original_positions.append(node.position)
 
@@ -90,6 +103,9 @@ func _ready():
 	initial_pin_right_two_node_b = PinRightTwo.node_b
 	initial_pin_left_one_node_b = PinLeftOne.node_b
 	initial_pin_left_two_node_b = PinLeftTwo.node_b
+
+	# Connect the area_entered signal using Callable
+	connect("area_entered", Callable(self, "_on_area_entered"))
 
 func reset_player():
 	# Reset body properties
@@ -136,8 +152,63 @@ func reset_wall_state():
 	# Reset charging state
 	is_charging_jump = false
 	charge_time = 0.0
+	
+func died():
+	if not is_alive:
+		return  # Exit if the player is already dead
+
+	is_alive = false  # Mark the player as dead
+	walk_sound.stop()
+	dead_sound.play()  # Play the death sound
+	death_particle.emitting = true
+	velocity = Vector2.ZERO  # Stop all movement
+	move_and_slide()
+
+	# Set the break distance of both softbodies to 1
+	right_facing_softbody.break_distance_ratio = 0.8
+	left_facing_softbody.break_distance_ratio = 0.8
+
+	# Start the gradual head expansion
+	gradually_expand_head()
+
+func gradually_expand_head():
+	# Create a new Tween node
+	var tween = create_tween()
+	tween.set_parallel(true)  # Animate all head nodes in parallel
+
+	# How strong should head expansion be? 4~ change for intensity of expansion
+	var expansion = 20.0
+
+	# Duration of the expansion animation (in seconds)
+	var duration = 4 # Adjust this value to control the speed of the expansion
+
+	# Animate the right head nodes
+	for i in head_nodes_right.size():
+		var dir = (head_right_original_positions[i] - bodyRight.position).normalized()
+		var target_position = head_right_original_positions[i] + dir * expansion
+		tween.tween_property(head_nodes_right[i], "position", target_position, duration)
+
+	# Animate the left head nodes
+	for i in head_nodes_left.size():
+		var dir = (head_left_original_positions[i] - bodyLeft.position).normalized()
+		var target_position = head_left_original_positions[i] + dir * expansion
+		tween.tween_property(head_nodes_left[i], "position", target_position, duration)
 
 func _physics_process(delta: float) -> void:
+	if health <= 0 and is_alive:
+		died()  # Call died() only once when health drops to 0
+		return
+		
+	if health == 6 and is_alive:
+		health_bar.visible = false
+	elif health <= 5 and is_alive:
+		health_bar.visible = true
+
+	# Exit early if the player is dead
+	if not is_alive:
+		move_and_slide()  # Ensure the player stays in place
+		return
+
 	# Check if the player was on the wall in the previous frame but is no longer on the wall
 	if was_on_wall and not is_on_wall():
 		# Save velocity before resetting
@@ -226,7 +297,6 @@ func _physics_process(delta: float) -> void:
 				velocity.x = direction * SPEED
 				set_player_visible(direction > 0)
 			else:
-				
 				walk_sound.playing = true
 				velocity.x = move_toward(velocity.x, 0, SPEED)
 
@@ -235,6 +305,7 @@ func _physics_process(delta: float) -> void:
 		if is_in_air:
 			# Player was in the air and just landed
 			splat_sound.play()
+			splat_particle.emitting = true
 			is_in_air = false
 	else:
 		# Player is in the air
@@ -266,3 +337,13 @@ func reset_head():
 func set_player_visible(is_facing_right: bool):
 	right_facing_softbody.visible = is_facing_right
 	left_facing_softbody.visible = not is_facing_right
+
+func _on_area_2d_area_entered(area: Area2D) -> void:
+	if area.is_in_group("enemy"):
+		health -= 1
+		if health != 0:
+			hurt_sound.play()
+		health_bar.health = health
+	elif area.is_in_group("health_item") && !health == 6:
+		health += 1
+		health_bar.health = health

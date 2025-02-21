@@ -26,10 +26,16 @@ folder_colors={
 "res://assets/": "red",
 "res://assets/Player/": "blue",
 "res://assets/Sounds/": "teal",
+"res://assets/Sounds/Player_Sounds/": "blue",
 "res://assets/enemies/": "teal",
 "res://samples/": "orange",
 "res://scripts/": "yellow"
 }
+
+[global_group]
+
+health_item=""
+enemy=""
 
 [input]
 

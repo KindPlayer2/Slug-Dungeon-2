@@ -12,7 +12,7 @@ func _ready() -> void:
 	add_child(instance)
 	
 	var instance2 = BeetleScene.instantiate() # Replace with function body.
-	instance2.position = Vector2(400,10)
+	instance2.position = Vector2(209,132)
 	add_child(instance2)
 
 func inst(pos: Vector2):
