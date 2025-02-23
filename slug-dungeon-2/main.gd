@@ -6,13 +6,13 @@ var BeetleScene = preload("res://Beetle.tscn")
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	inst(Vector2(0,200))
+	inst(Vector2(1000,1000))
 	var instance = leafManScene.instantiate() # Replace with function body.
 	instance.position = Vector2(-500,10)
 	add_child(instance)
 	
 	var instance2 = BeetleScene.instantiate() # Replace with function body.
-	instance2.position = Vector2(209,132)
+	instance2.position = Vector2(1280,880)
 	add_child(instance2)
 
 func inst(pos: Vector2):

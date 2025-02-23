@@ -291,7 +291,7 @@ func _physics_process(delta: float) -> void:
 			_last_wall_tangent = tangent
 
 			velocity += tangent * WallDirection * SPEED * delta
-			velocity = velocity.limit_length(SPEED)
+			velocity = velocity.limit_length(SPEED) * 1.3
 		else:
 			if direction:
 				velocity.x = direction * SPEED

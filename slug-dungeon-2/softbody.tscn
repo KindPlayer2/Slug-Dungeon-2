@@ -1,7 +1,15 @@
-[gd_scene load_steps=10 format=3 uid="uid://d0dsigoyner1r"]
+[gd_scene load_steps=18 format=3 uid="uid://d0dsigoyner1r"]
 
 [ext_resource type="Script" path="res://main.gd" id="1_4iknf"]
+[ext_resource type="Texture2D" uid="uid://bxx5v7b42j4kf" path="res://addons/softbody2d/softbody2d.svg" id="2_pn1i2"]
 [ext_resource type="Texture2D" uid="uid://o3e06vpqq56c" path="res://assets/black texture.png" id="2_xnrho"]
+[ext_resource type="Texture2D" uid="uid://cxc1sqhwtc7n1" path="res://assets/Backgrounds/Outside/OutsideBackground2.png" id="3_qwf22"]
+[ext_resource type="Texture2D" uid="uid://bpo2yrsxamxg" path="res://assets/Backgrounds/Outside/OutsideBackground.png" id="4_4nbna"]
+[ext_resource type="Texture2D" uid="uid://bmj7i4a0kfaui" path="res://assets/Backgrounds/Outside/mist.png" id="5_8cu0v"]
+[ext_resource type="Texture2D" uid="uid://tftxv1ysmw4o" path="res://assets/Backgrounds/Outside/OutsideMiddleground.png" id="5_je54s"]
+[ext_resource type="Texture2D" uid="uid://beyx2etju64u2" path="res://assets/Backgrounds/Outside/OutsideForeground.png" id="6_5u83c"]
+[ext_resource type="Texture2D" uid="uid://cpcfkdydkxvly" path="res://assets/Backgrounds/Outside/mist2.png" id="7_a0xc5"]
+[ext_resource type="Texture2D" uid="uid://bjqmnrr7sml5u" path="res://assets/Backgrounds/Outside/GroundOutside.png" id="10_ydvus"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_gfgne"]
 
@@ -25,8 +33,13 @@ size = Vector2(197.466, 456.877)
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_4iknf")
 
+[node name="!!!AAA" type="Sprite2D" parent="."]
+position = Vector2(1280, 1000)
+scale = Vector2(0.58125, 0.41875)
+texture = ExtResource("2_pn1i2")
+
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-position = Vector2(-2, 274)
+position = Vector2(983, 1018)
 collision_layer = 4095
 collision_mask = 4095
 physics_material_override = SubResource("PhysicsMaterial_gfgne")
@@ -40,12 +53,8 @@ position = Vector2(0, 48)
 scale = Vector2(4.78516, 72.5)
 texture = SubResource("GradientTexture1D_i8ldp")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(8, 31)
-ignore_rotation = false
-
 [node name="StaticBody2D2" type="StaticBody2D" parent="." groups=["Wall"]]
-position = Vector2(282, -64)
+position = Vector2(1267, 659)
 collision_layer = 4095
 collision_mask = 4095
 
@@ -78,7 +87,7 @@ scale = Vector2(0.103382, 0.112775)
 texture = ExtResource("2_xnrho")
 
 [node name="StaticBody2D3" type="StaticBody2D" parent="."]
-position = Vector2(-209, 207)
+position = Vector2(776, 930)
 scale = Vector2(0.576103, 0.77811)
 collision_layer = 15
 collision_mask = 15
@@ -101,3 +110,88 @@ offset_top = -217.0
 offset_right = -268.0
 offset_bottom = -194.0
 text = "Pin node b: "
+
+[node name="Full background" type="Parallax2D" parent="."]
+z_index = -2
+scale = Vector2(2, 2)
+scroll_scale = Vector2(0.1, 1)
+scroll_offset = Vector2(960, 540)
+repeat_size = Vector2(645, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Full background"]
+position = Vector2(9.6, -1.8)
+scale = Vector2(5, 5)
+texture = ExtResource("4_4nbna")
+
+[node name="Background1" type="Parallax2D" parent="."]
+z_index = -1
+scale = Vector2(5, 5)
+scroll_scale = Vector2(0.25, 1)
+scroll_offset = Vector2(960, 540)
+repeat_size = Vector2(384, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Background1"]
+scale = Vector2(1, 1)
+texture = ExtResource("3_qwf22")
+
+[node name="Mist2" type="Parallax2D" parent="."]
+z_index = -1
+scale = Vector2(5, 5)
+scroll_scale = Vector2(0.44, 0.44)
+scroll_offset = Vector2(960, 540)
+repeat_size = Vector2(384, 216)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Mist2"]
+scale = Vector2(1, 1)
+texture = ExtResource("7_a0xc5")
+
+[node name="Middleground" type="Parallax2D" parent="."]
+z_index = -1
+scale = Vector2(5, 5)
+scroll_scale = Vector2(0.5, 1)
+scroll_offset = Vector2(960, 540)
+repeat_size = Vector2(384, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Middleground"]
+scale = Vector2(1, 1)
+texture = ExtResource("5_je54s")
+
+[node name="Mist1" type="Parallax2D" parent="."]
+z_index = -1
+scale = Vector2(5, 5)
+scroll_scale = Vector2(0.66, 0.66)
+scroll_offset = Vector2(960, 540)
+repeat_size = Vector2(384, 216)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Mist1"]
+scale = Vector2(1, 1)
+texture = ExtResource("5_8cu0v")
+
+[node name="Foreground" type="Parallax2D" parent="."]
+z_index = -1
+scale = Vector2(5, 5)
+scroll_scale = Vector2(0.75, 1)
+scroll_offset = Vector2(960, 540)
+repeat_size = Vector2(384, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Foreground"]
+scale = Vector2(1, 1)
+texture = ExtResource("6_5u83c")
+
+[node name="Ground" type="Parallax2D" parent="."]
+z_index = -1
+scale = Vector2(5, 5)
+scroll_scale = Vector2(0.85, 1)
+scroll_offset = Vector2(-956, 522)
+repeat_size = Vector2(384, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Ground"]
+scale = Vector2(1, 1)
+texture = ExtResource("10_ydvus")
