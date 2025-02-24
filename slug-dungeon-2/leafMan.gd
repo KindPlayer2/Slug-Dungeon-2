@@ -35,56 +35,28 @@ func _physics_process(delta: float) -> void:
 		velocity.y += gravity * delta
 
 	move_and_slide()
-
-	# Check for collisions with the Player group
-	for i in get_slide_collision_count():
-		var collision = get_slide_collision(i)
-		if collision.get_collider().is_in_group("Attack"):
-			on_player_collision()
-
-func on_player_collision():
 	
-	death_particle.emitting = true
-	
-	# Make the animated sprite invisible
-	animated_sprite.visible = false
-	
-	# Make the death sprite visible2
-	death_sprite.visible = true
-	
-	# Stop the looping sound
-	if looping_sound.playing:
-		looping_sound.stop()
-	
-	# Play the death sound (if not already playing)
-	if not death_sound.playing:
-		death_sound.play()
-	
-	# Disable further collisions (optional)
-	set_collision_mask_value(1, false)  # Disable collision with layer 1 (Player)
-
-
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	print("collided") # Replace with function body.
-	collisions = Area.get_overlapping_bodies() 
-	for i in collisions.size():  # Use collisions.size() to iterate over indices
-		if !isDead :#and collisions[i].is_in_group("Attack"):  # Access the element at index i
-			isDead = true
-			death_particle.emitting = true
+
+	if !isDead and area.is_in_group("Attack") :#and collisions[i].is_in_group("Attack"):  # Access the element at index i
+
+		isDead = true
+		death_particle.emitting = true
 			
-			# Make the animated sprite invisible
-			animated_sprite.visible = false
+		# Make the animated sprite invisible
+		animated_sprite.visible = false
 			
-			# Make the death sprite visible
-			death_sprite.visible = true
+		# Make the death sprite visible
+		death_sprite.visible = true
 			
-			# Stop the looping sound
-			if looping_sound.playing:
-				looping_sound.stop()
+		# Stop the looping sound
+		if looping_sound.playing:
+			looping_sound.stop()
 			
-			# Play the death sound (if not already playing)
-			if not death_sound.playing:
+		# Play the death sound (if not already playing)
+		if not death_sound.playing:
 				death_sound.play()
 			
-			# Disable further collisions (optional)
-			set_collision_mask_value(1, false)  # Disable collision with layer 1 (Player)
+		# Disable further collisions (optional)
+		set_collision_mask_value(1, false)  # Disable collision with layer 1 (Player)

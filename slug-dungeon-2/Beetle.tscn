@@ -105,7 +105,7 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rnbju"]
-size = Vector2(22, 27.4)
+size = Vector2(33.4, 30.3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8m33o"]
 size = Vector2(23.3, 30.4)
@@ -155,12 +155,16 @@ anim_offset_max = 0.4595
 
 [node name="Node2D" type="Node2D"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." node_paths=PackedStringArray("animated_sprite", "audio_stream_player_2d", "death_particle", "death_sprite") groups=["enemy"]]
+[node name="StaticBody2D" type="StaticBody2D" parent="." node_paths=PackedStringArray("animated_sprite", "audio_stream_player_2d", "death_particle", "death_sprite", "attackArea", "weakArea") groups=["enemy"]]
+collision_layer = 256
+collision_mask = 256
 script = ExtResource("1_wggy3")
 animated_sprite = NodePath("Idle")
 audio_stream_player_2d = NodePath("AudioStreamPlayer2D")
 death_particle = NodePath("GPUParticles2D")
 death_sprite = NodePath("Sprite2D")
+attackArea = NodePath("Attack")
+weakArea = NodePath("Weakness")
 
 [node name="Idle" type="AnimatedSprite2D" parent="StaticBody2D"]
 position = Vector2(101, 108)
@@ -170,7 +174,7 @@ animation = &"idle"
 frame_progress = 0.586606
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(126, 84.5)
+position = Vector2(104.5, 92.75)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_rnbju")
 
@@ -184,9 +188,9 @@ shape = SubResource("RectangleShape2D_8m33o")
 
 [node name="Weakness" type="Area2D" parent="StaticBody2D"]
 position = Vector2(21, 14)
-scale = Vector2(5, 5)
-collision_layer = 4088
-collision_mask = 9
+scale = Vector2(3.96, 5)
+collision_layer = 15
+collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Weakness"]
 position = Vector2(27.8, 15.8)
@@ -218,3 +222,4 @@ stream = ExtResource("6_5g858")
 volume_db = 12.0
 
 [connection signal="area_entered" from="StaticBody2D/Attack" to="StaticBody2D" method="_on_attack_area_entered"]
+[connection signal="area_entered" from="StaticBody2D/Weakness" to="StaticBody2D" method="_on_weakness_area_entered"]

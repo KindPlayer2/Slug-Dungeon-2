@@ -11,6 +11,9 @@ extends StaticBody2D
 # Reference to the death sprite (make sure it's initially invisible in the editor)
 @export var death_sprite: Sprite2D
 
+@export var attackArea: Area2D
+@export var weakArea: Area2D
+
 # Gravity variable
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var isDead: bool = false
@@ -24,12 +27,38 @@ func _ready() -> void:
 	animated_sprite.connect("animation_finished", Callable(self, "_on_animated_sprite_animation_finished"))
 
 func _on_attack_area_entered(area: Area2D) -> void:
-	# Play the "attack" animation
-	animated_sprite.play("attack")
-	audio_stream_player_2d.play()
+		# Play the "attack" animation
+		animated_sprite.play("attack")
+		audio_stream_player_2d.play()
 
 func _on_animated_sprite_animation_finished() -> void:
 	# Check if the current animation was "attack"
 	if animated_sprite.animation == "attack":
 		# Switch back to the "idle" animation
 		animated_sprite.play("idle")
+
+
+func _on_weakness_area_entered(area: Area2D) -> void:
+	print("collided") # Replace with function body.
+
+	if !isDead and area.is_in_group("Attack") :#and collisions[i].is_in_group("Attack"):  # Access the element at index i
+
+		isDead = true
+		death_particle.emitting = true
+			
+		# Make the animated sprite invisible
+		animated_sprite.visible = false
+			
+		# Make the death sprite visible
+		death_sprite.visible = true
+		
+		weakArea.monitoring = false
+		weakArea.monitorable = false
+		weakArea.visible = false
+		attackArea.monitoring = false
+		attackArea.monitorable = false
+		attackArea.visible = false
+		
+			
+		# Disable further collisions (optional)
+		set_collision_mask_value(1, false)  # Disable collision with layer 1 (Player)

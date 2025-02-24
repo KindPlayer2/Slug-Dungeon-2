@@ -15,6 +15,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Track whether the player is in the air
 var is_in_air := false
 
+@export var isAttacking:bool = false
+
 # Sounds
 @export var jump_sound: AudioStreamPlayer2D
 @export var charge_sound: AudioStreamPlayer2D
@@ -53,6 +55,8 @@ var head_left_original_positions: Array[Vector2]
 @export var death_particle: GPUParticles2D
 @export var splat_particle: GPUParticles2D
 
+@export var attackTimer: Timer
+
 @onready var health_bar: ProgressBar = $HealthBar
 
 # Track whether the player was on the wall in the previous frame
@@ -88,6 +92,9 @@ var health = 6
 func _ready():
 	health_bar.init_health(health)
 	set_player_visible(true)
+	
+	# Connect the attackTimer's timeout signal to a function
+	attackTimer.connect("timeout", Callable(self, "_on_attackTimer_timeout"))
 
 	# Assign the heads' original positions
 	head_right_original_positions = []
@@ -210,6 +217,10 @@ func attack():
 	
 	AttackArea.monitoring = true
 	AttackArea.monitorable = true
+	AttackArea.scale = Vector2(1,1)
+	
+	attackTimer.start()
+	isAttacking = true
 
 	# Animate the right head nodes
 	for i in head_nodes_right.size():
@@ -236,8 +247,14 @@ func attack():
 		# Main motion: Move to the target position
 		var target_position = head_left_original_positions[i] + dir * expansion
 		tween.tween_property(head_nodes_left[i], "position", target_position, duration).set_delay(duration)
-	#AttackArea.monitorable = false
-	#AttackArea.monitoring = false
+	
+func _on_attackTimer_timeout():
+	# Code to run after the timer finishes
+	AttackArea.monitorable = false
+	AttackArea.monitoring = false
+	isAttacking = false
+	AttackArea.scale = Vector2(0.5,0.5)
+
 
 func _physics_process(delta: float) -> void:
 	if health <= 0 and is_alive:
