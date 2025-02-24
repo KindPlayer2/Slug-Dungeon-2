@@ -1,8 +1,8 @@
 [gd_scene load_steps=20 format=3 uid="uid://mt3n5mdme4yk"]
 
-[ext_resource type="Script" path="res://leaf_man.gd" id="1_inaip"]
+[ext_resource type="Script" uid="uid://0r4v3468fx8g" path="res://leaf_man.gd" id="1_inaip"]
 [ext_resource type="Texture2D" uid="uid://bbfbpcfkrgncv" path="res://assets/enemies/leafman.png" id="1_y5pic"]
-[ext_resource type="Script" path="res://leafMan.gd" id="2_khhyd"]
+[ext_resource type="Script" uid="uid://b2rhw5a7mwti1" path="res://leafMan.gd" id="2_khhyd"]
 [ext_resource type="AudioStream" uid="uid://duhks7l3ejmih" path="res://assets/Sounds/leafmanvoice.mp3" id="4_rbxyd"]
 [ext_resource type="AudioStream" uid="uid://nt0pu0srxqen" path="res://assets/Sounds/leafmandeath_AY13gqEK.mp3" id="5_0jgif"]
 [ext_resource type="Texture2D" uid="uid://ctn8u4nxu7cw6" path="res://assets/enemies/deadLeaf.png" id="6_ycmsm"]
@@ -33,7 +33,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_345mj"]
 
 [sub_resource type="Curve" id="Curve_ljkg7"]
-max_value = 200.0
+_limits = [0.0, 200.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -48,7 +48,7 @@ colors = PackedColorArray(0.890196, 0, 0, 0, 0.507244, 1.26945e-06, 1.92523e-07,
 gradient = SubResource("Gradient_311hm")
 
 [sub_resource type="Curve" id="Curve_dyjrs"]
-max_value = 100.0
+_limits = [0.0, 100.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
 point_count = 3
 
@@ -80,7 +80,7 @@ anim_offset_max = 0.4595
 [node name="Node2D" type="Node2D"]
 script = ExtResource("1_inaip")
 
-[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("animated_sprite", "death_sprite", "looping_sound", "death_sound", "death_particle") groups=["health_item"]]
+[node name="CharacterBody2D" type="CharacterBody2D" parent="." node_paths=PackedStringArray("animated_sprite", "death_sprite", "looping_sound", "death_sound", "death_particle", "Area") groups=["health_item"]]
 scale = Vector2(5, 5)
 collision_layer = 4088
 collision_mask = 9
@@ -90,6 +90,7 @@ death_sprite = NodePath("Sprite2D")
 looping_sound = NodePath("loop")
 death_sound = NodePath("death")
 death_particle = NodePath("GPUParticles2D")
+Area = NodePath("Area2D")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="CharacterBody2D"]
 position = Vector2(17, 17)
@@ -119,13 +120,13 @@ texture = ExtResource("6_ycmsm")
 position = Vector2(16.6667, 18)
 emitting = false
 amount = 1000
-process_material = SubResource("ParticleProcessMaterial_aubxj")
 texture = ExtResource("7_gk04c")
 lifetime = 3.0
 one_shot = true
 speed_scale = 2.0
 explosiveness = 1.0
 randomness = 0.3
+process_material = SubResource("ParticleProcessMaterial_aubxj")
 
 [node name="Area2D" type="Area2D" parent="CharacterBody2D" groups=["health_item"]]
 

@@ -23,6 +23,8 @@ var is_in_air := false
 @export var dead_sound: AudioStreamPlayer2D
 @export var hurt_sound: AudioStreamPlayer2D
 
+@export var AttackArea:Area2D
+
 # Reference to the head RigidBody2D nodes
 @export var head_nodes_right: Array[RigidBody2D]
 var head_right_original_positions: Array[Vector2]
@@ -68,7 +70,10 @@ func _input(event: InputEvent) -> void:
 
 	if event.is_action_pressed("Rotate") and health > 0:
 		dead_sound.play()
-
+		
+	if event.is_action_pressed("Attack"):
+		attack()
+		
 var initial_body_right_position: Vector2
 var initial_body_right_velocity: Vector2
 var initial_body_left_position: Vector2
@@ -193,6 +198,46 @@ func gradually_expand_head():
 		var dir = (head_left_original_positions[i] - bodyLeft.position).normalized()
 		var target_position = head_left_original_positions[i] + dir * expansion
 		tween.tween_property(head_nodes_left[i], "position", target_position, duration)
+		
+func attack():
+	var tween = create_tween()
+	tween.set_parallel(true)  # Animate all head nodes in parallel
+	
+	# How strong should head expansion be? 4~ change for intensity of expansion
+	var expansion = 15.0
+	# Duration of the expansion animation (in seconds)
+	var duration = 0.05 # Adjust this value to control the speed of the expansion
+	
+	AttackArea.monitoring = true
+	AttackArea.monitorable = true
+
+	# Animate the right head nodes
+	for i in head_nodes_right.size():
+		var dir = (head_right_original_positions[i] - bodyRight.position).normalized()
+		dir = Vector2(dir.x, 0).normalized()  # Only consider the X component
+
+		# Anticipation: Move in the opposite direction
+		var anticipation_position = head_right_original_positions[i] - dir * (expansion / 3.0)
+		tween.tween_property(head_nodes_right[i], "position", anticipation_position, duration)
+
+		# Main motion: Move to the target position
+		var target_position = head_right_original_positions[i] + dir * expansion
+		tween.tween_property(head_nodes_right[i], "position", target_position, duration).set_delay(duration)
+
+		# Animate the left head nodes
+	for i in head_nodes_left.size():
+		var dir = (head_left_original_positions[i] - bodyLeft.position).normalized()
+		dir = Vector2(dir.x, 0).normalized()  # Only consider the X component
+
+		# Anticipation: Move in the opposite direction
+		var anticipation_position = head_left_original_positions[i] - dir * (expansion / 3.0)
+		tween.tween_property(head_nodes_left[i], "position", anticipation_position, duration)
+
+		# Main motion: Move to the target position
+		var target_position = head_left_original_positions[i] + dir * expansion
+		tween.tween_property(head_nodes_left[i], "position", target_position, duration).set_delay(duration)
+	#AttackArea.monitorable = false
+	#AttackArea.monitoring = false
 
 func _physics_process(delta: float) -> void:
 	if health <= 0 and is_alive:

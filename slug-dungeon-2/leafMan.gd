@@ -15,9 +15,13 @@ extends CharacterBody2D
 # Reference to the death sound player (e.g., AudioStreamPlayer)
 @export var death_particle: GPUParticles2D
 
+@export var Area: Area2D
+
+
 # Gravity variable
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 var isDead:bool = false
+var collisions = []
 
 func _ready():
 	# Ensure the death sprite is invisible at the start
@@ -25,6 +29,7 @@ func _ready():
 	
 
 func _physics_process(delta: float) -> void:
+	
 	# Add gravity
 	if not is_on_floor():
 		velocity.y += gravity * delta
@@ -34,7 +39,7 @@ func _physics_process(delta: float) -> void:
 	# Check for collisions with the Player group
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
-		if collision.get_collider().is_in_group("Player"):
+		if collision.get_collider().is_in_group("Attack"):
 			on_player_collision()
 
 func on_player_collision():
@@ -44,7 +49,7 @@ func on_player_collision():
 	# Make the animated sprite invisible
 	animated_sprite.visible = false
 	
-	# Make the death sprite visible
+	# Make the death sprite visible2
 	death_sprite.visible = true
 	
 	# Stop the looping sound
@@ -61,23 +66,25 @@ func on_player_collision():
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	print("collided") # Replace with function body.
-	if !isDead:
-		isDead = true
-		death_particle.emitting = true
-		
-		# Make the animated sprite invisible
-		animated_sprite.visible = false
-		
-		# Make the death sprite visible
-		death_sprite.visible = true
-		
-		# Stop the looping sound
-		if looping_sound.playing:
-			looping_sound.stop()
-		
-		# Play the death sound (if not already playing)
-		if not death_sound.playing:
-			death_sound.play()
-		
-		# Disable further collisions (optional)
-		set_collision_mask_value(1, false)  # Disable collision with layer 1 (Player)
+	collisions = Area.get_overlapping_bodies() 
+	for i in collisions.size():  # Use collisions.size() to iterate over indices
+		if !isDead :#and collisions[i].is_in_group("Attack"):  # Access the element at index i
+			isDead = true
+			death_particle.emitting = true
+			
+			# Make the animated sprite invisible
+			animated_sprite.visible = false
+			
+			# Make the death sprite visible
+			death_sprite.visible = true
+			
+			# Stop the looping sound
+			if looping_sound.playing:
+				looping_sound.stop()
+			
+			# Play the death sound (if not already playing)
+			if not death_sound.playing:
+				death_sound.play()
+			
+			# Disable further collisions (optional)
+			set_collision_mask_value(1, false)  # Disable collision with layer 1 (Player)

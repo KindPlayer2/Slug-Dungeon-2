@@ -1,8 +1,8 @@
-[gd_scene load_steps=77 format=3 uid="uid://bc626pe7caemo"]
+[gd_scene load_steps=78 format=3 uid="uid://bc626pe7caemo"]
 
-[ext_resource type="Script" path="res://scripts/Player_move.gd" id="1_12l3o"]
+[ext_resource type="Script" uid="uid://blqh2t264vrl3" path="res://scripts/Player_move.gd" id="1_12l3o"]
 [ext_resource type="Texture2D" uid="uid://bauu1ffa68cs8" path="res://assets/Player/slug.png" id="2_sarpv"]
-[ext_resource type="Script" path="res://addons/softbody2d/softbody2d.gd" id="3_nvep6"]
+[ext_resource type="Script" uid="uid://f52de6asqp5k" path="res://addons/softbody2d/softbody2d.gd" id="3_nvep6"]
 [ext_resource type="Texture2D" uid="uid://d4lkwni1fiw7c" path="res://assets/Player/slug - Copy.png" id="4_dpi3m"]
 [ext_resource type="AudioStream" uid="uid://boya05rm035ec" path="res://assets/Sounds/Player_Sounds/jump_41g16G8A.mp3" id="5_fp1vq"]
 [ext_resource type="AudioStream" uid="uid://cgl3k2xgokbub" path="res://assets/Sounds/Player_Sounds/charge_JCiJIkR7.mp3" id="6_01qgf"]
@@ -13,7 +13,7 @@
 [ext_resource type="AudioStream" uid="uid://snvvw5bk2mt7" path="res://assets/Sounds/Player_Sounds/Track5_VoiceAudio.mp3" id="11_gdtwq"]
 [ext_resource type="AudioStream" uid="uid://cg4bocu1i0gq8" path="res://assets/Sounds/Player_Sounds/Ahhhh.mp3" id="12_imy68"]
 [ext_resource type="Texture2D" uid="uid://f0ci8iuoxbbf" path="res://assets/purpix.png" id="13_s1bnl"]
-[ext_resource type="Script" path="res://camera_2d.gd" id="14_vssje"]
+[ext_resource type="Script" uid="uid://bdrq276c5wy24" path="res://camera_2d.gd" id="14_vssje"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_conrc"]
 radius = 23.933
@@ -423,7 +423,7 @@ size = Vector2(3, 3)
 size = Vector2(183, 81)
 
 [sub_resource type="Curve" id="Curve_l6hup"]
-max_value = 200.0
+_limits = [0.0, 200.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
@@ -438,7 +438,7 @@ colors = PackedColorArray(0.692684, 0.043577, 0.915785, 0, 0.645589, 0.00219919,
 gradient = SubResource("Gradient_nadi5")
 
 [sub_resource type="Curve" id="Curve_8517k"]
-max_value = 100.0
+_limits = [0.0, 100.0, 0.0, 1.0]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
 point_count = 3
 
@@ -484,7 +484,10 @@ anim_speed_curve = SubResource("CurveTexture_mt8ge")
 anim_offset_min = 0.4595
 anim_offset_max = 0.4595
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("jump_sound", "charge_sound", "walk_sound", "splat_sound", "dead_sound", "hurt_sound", "head_nodes_right", "head_nodes_left", "bodyRight", "bodyLeft", "right_facing_softbody", "left_facing_softbody", "PinRightOne", "PinRightTwo", "PinLeftOne", "PinLeftTwo", "death_particle", "splat_particle") groups=["Player"]]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bwjto"]
+size = Vector2(290, 81)
+
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("jump_sound", "charge_sound", "walk_sound", "splat_sound", "dead_sound", "hurt_sound", "AttackArea", "head_nodes_right", "head_nodes_left", "bodyRight", "bodyLeft", "right_facing_softbody", "left_facing_softbody", "PinRightOne", "PinRightTwo", "PinLeftOne", "PinLeftTwo", "death_particle", "splat_particle") groups=["Player"]]
 position = Vector2(419, 268)
 collision_layer = 2
 collision_mask = 2
@@ -497,6 +500,7 @@ walk_sound = NodePath("Walk")
 splat_sound = NodePath("Splat")
 dead_sound = NodePath("dead")
 hurt_sound = NodePath("hurt")
+AttackArea = NodePath("AttackArea")
 head_nodes_right = [NodePath("SoftBodyRight/Bone-1"), NodePath("SoftBodyRight/Bone-4"), NodePath("SoftBodyRight/Bone-7"), NodePath("SoftBodyRight/Bone-10"), NodePath("SoftBodyRight/Bone-11"), NodePath("SoftBodyRight/Bone-12"), NodePath("SoftBodyRight/Bone-13"), NodePath("SoftBodyRight/Bone-14"), NodePath("SoftBodyRight/Bone-15"), NodePath("SoftBodyRight/Bone-16"), NodePath("SoftBodyRight/Bone-17"), NodePath("SoftBodyRight/Bone-18"), NodePath("SoftBodyRight/Bone-19"), NodePath("SoftBodyRight/Bone-20"), NodePath("SoftBodyRight/Bone-21"), NodePath("SoftBodyRight/Bone-22")]
 head_nodes_left = [NodePath("SoftBodyLeft/Bone-0"), NodePath("SoftBodyLeft/Bone-1"), NodePath("SoftBodyLeft/Bone-2"), NodePath("SoftBodyLeft/Bone-3"), NodePath("SoftBodyLeft/Bone-4"), NodePath("SoftBodyLeft/Bone-5"), NodePath("SoftBodyLeft/Bone-6"), NodePath("SoftBodyLeft/Bone-7"), NodePath("SoftBodyLeft/Bone-8"), NodePath("SoftBodyLeft/Bone-9"), NodePath("SoftBodyLeft/Bone-10"), NodePath("SoftBodyLeft/Bone-11"), NodePath("SoftBodyLeft/Bone-12"), NodePath("SoftBodyLeft/Bone-13"), NodePath("SoftBodyLeft/Bone-16"), NodePath("SoftBodyLeft/Bone-17"), NodePath("SoftBodyLeft/Bone-19")]
 bodyRight = NodePath("SoftBodyRight/Bone-0")
@@ -688,7 +692,6 @@ metadata/_local_pose_override_enabled_ = true
 [node name="Bone-9" type="Bone2D" parent="SoftBodyRight/Skeleton2D"]
 position = Vector2(15.1135, 30.2565)
 rotation = -1.55062
-scale = Vector2(1, 1)
 rest = Transform2D(0.0201575, -0.999797, 0.999797, 0.0201575, 15.1135, 30.2565)
 auto_calculate_length_and_angle = false
 length = 5.0
@@ -786,6 +789,7 @@ metadata/_local_pose_override_enabled_ = true
 [node name="Bone-16" type="Bone2D" parent="SoftBodyRight/Skeleton2D"]
 position = Vector2(24.0015, 22.9445)
 rotation = 1.53878
+scale = Vector2(1, 1)
 rest = Transform2D(0.0320037, 0.999488, -0.999488, 0.0320037, 24.0015, 22.9445)
 auto_calculate_length_and_angle = false
 length = 5.0
@@ -3959,13 +3963,13 @@ position = Vector2(-0.999977, -6.99999)
 scale = Vector2(5, 5)
 emitting = false
 amount = 1000
-process_material = SubResource("ParticleProcessMaterial_43o1q")
 texture = ExtResource("10_wtkue")
 lifetime = 3.0
 one_shot = true
 speed_scale = 2.0
 explosiveness = 1.0
 randomness = 0.3
+process_material = SubResource("ParticleProcessMaterial_43o1q")
 
 [node name="hurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_gdtwq")
@@ -3980,13 +3984,13 @@ position = Vector2(-4, 14)
 scale = Vector2(5, 5)
 emitting = false
 amount = 200
-process_material = SubResource("ParticleProcessMaterial_p0m80")
 texture = ExtResource("13_s1bnl")
 lifetime = 0.5
 one_shot = true
 speed_scale = 2.0
 explosiveness = 0.5
 trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_p0m80")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("playa")]
 position = Vector2(0, -46)
@@ -3994,4 +3998,11 @@ offset = Vector2(0, -50)
 script = ExtResource("14_vssje")
 playa = NodePath("..")
 
+[node name="AttackArea" type="Area2D" parent="." groups=["Attack"]]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AttackArea" groups=["Attack"]]
+position = Vector2(-3, -20.5)
+shape = SubResource("RectangleShape2D_bwjto")
+
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_entered" from="AttackArea" to="." method="_on_area_2d_area_entered"]

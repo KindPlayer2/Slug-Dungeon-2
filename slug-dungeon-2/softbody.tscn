@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://d0dsigoyner1r"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_4iknf"]
+[ext_resource type="Script" uid="uid://cu4k1rxg36btq" path="res://main.gd" id="1_4iknf"]
 [ext_resource type="Texture2D" uid="uid://bxx5v7b42j4kf" path="res://addons/softbody2d/softbody2d.svg" id="2_pn1i2"]
 [ext_resource type="Texture2D" uid="uid://o3e06vpqq56c" path="res://assets/black texture.png" id="2_xnrho"]
 [ext_resource type="Texture2D" uid="uid://cxc1sqhwtc7n1" path="res://assets/Backgrounds/Outside/OutsideBackground2.png" id="3_qwf22"]
@@ -34,6 +34,7 @@ size = Vector2(197.466, 456.877)
 script = ExtResource("1_4iknf")
 
 [node name="!!!AAA" type="Sprite2D" parent="."]
+visible = false
 position = Vector2(1280, 1000)
 scale = Vector2(0.58125, 0.41875)
 texture = ExtResource("2_pn1i2")
@@ -133,7 +134,6 @@ repeat_size = Vector2(384, 0)
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Background1"]
-scale = Vector2(1, 1)
 texture = ExtResource("3_qwf22")
 
 [node name="Mist2" type="Parallax2D" parent="."]
@@ -145,7 +145,6 @@ repeat_size = Vector2(384, 216)
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Mist2"]
-scale = Vector2(1, 1)
 texture = ExtResource("7_a0xc5")
 
 [node name="Middleground" type="Parallax2D" parent="."]
@@ -157,7 +156,6 @@ repeat_size = Vector2(384, 0)
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Middleground"]
-scale = Vector2(1, 1)
 texture = ExtResource("5_je54s")
 
 [node name="Mist1" type="Parallax2D" parent="."]
@@ -169,7 +167,6 @@ repeat_size = Vector2(384, 216)
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Mist1"]
-scale = Vector2(1, 1)
 texture = ExtResource("5_8cu0v")
 
 [node name="Foreground" type="Parallax2D" parent="."]
@@ -181,7 +178,6 @@ repeat_size = Vector2(384, 0)
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Foreground"]
-scale = Vector2(1, 1)
 texture = ExtResource("6_5u83c")
 
 [node name="Ground" type="Parallax2D" parent="."]
@@ -193,5 +189,4 @@ repeat_size = Vector2(384, 0)
 repeat_times = 3
 
 [node name="Sprite2D" type="Sprite2D" parent="Ground"]
-scale = Vector2(1, 1)
 texture = ExtResource("10_ydvus")
