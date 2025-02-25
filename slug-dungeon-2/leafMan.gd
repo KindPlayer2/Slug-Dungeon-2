@@ -60,3 +60,9 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			
 		# Disable further collisions (optional)
 		set_collision_mask_value(1, false)  # Disable collision with layer 1 (Player)
+		
+		# Wait for the death particle effect to finish before removing the creature
+		await get_tree().create_timer(death_particle.lifetime).timeout
+		
+		# Remove the creature from the scene
+		queue_free()

@@ -27,9 +27,9 @@ func _ready() -> void:
 	animated_sprite.connect("animation_finished", Callable(self, "_on_animated_sprite_animation_finished"))
 
 func _on_attack_area_entered(area: Area2D) -> void:
-		# Play the "attack" animation
-		animated_sprite.play("attack")
-		audio_stream_player_2d.play()
+	# Play the "attack" animation
+	animated_sprite.play("attack")
+	audio_stream_player_2d.play()
 
 func _on_animated_sprite_animation_finished() -> void:
 	# Check if the current animation was "attack"
@@ -37,14 +37,13 @@ func _on_animated_sprite_animation_finished() -> void:
 		# Switch back to the "idle" animation
 		animated_sprite.play("idle")
 
-
 func _on_weakness_area_entered(area: Area2D) -> void:
 	print("collided") # Replace with function body.
 
-	if !isDead and area.is_in_group("Attack") :#and collisions[i].is_in_group("Attack"):  # Access the element at index i
-
+	if !isDead and area.is_in_group("Attack"):
 		isDead = true
 		death_particle.emitting = true
+		queue_free()
 			
 		# Make the animated sprite invisible
 		animated_sprite.visible = false
@@ -59,6 +58,11 @@ func _on_weakness_area_entered(area: Area2D) -> void:
 		attackArea.monitorable = false
 		attackArea.visible = false
 		
-			
 		# Disable further collisions (optional)
 		set_collision_mask_value(1, false)  # Disable collision with layer 1 (Player)
+		
+		# Wait for the death particle effect to finish before removing the creature
+		await get_tree().create_timer(death_particle.lifetime).timeout
+		
+		# Remove the creature from the scene
+		queue_free()

@@ -402,10 +402,22 @@ func set_player_visible(is_facing_right: bool):
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
 	if area.is_in_group("enemy"):
+		# Determine the knockback direction based on the player's facing direction
+		var knockback_direction: Vector2
+		if right_facing_softbody.visible:
+			knockback_direction = Vector2.LEFT  # Player is facing right, so knockback is to the left
+		else:
+			knockback_direction = Vector2.RIGHT  # Player is facing left, so knockback is to the right
+
+		# Apply knockback force
+		var knockback_force = 500.0  # Adjust this value to control the strength of the knockback
+		velocity = knockback_direction * knockback_force
+
+		# Reduce health
 		health -= 1
 		if health != 0:
 			hurt_sound.play()
 		health_bar.health = health
-	elif area.is_in_group("health_item") && !health == 6:
+	elif area.is_in_group("health_item") && health < 6:
 		health += 1
 		health_bar.health = health

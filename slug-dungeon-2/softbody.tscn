@@ -1,6 +1,6 @@
 [gd_scene load_steps=18 format=3 uid="uid://d0dsigoyner1r"]
 
-[ext_resource type="Script" path="res://main.gd" id="1_4iknf"]
+[ext_resource type="Script" uid="uid://cu4k1rxg36btq" path="res://main.gd" id="1_4iknf"]
 [ext_resource type="Texture2D" uid="uid://bxx5v7b42j4kf" path="res://addons/softbody2d/softbody2d.svg" id="2_pn1i2"]
 [ext_resource type="Texture2D" uid="uid://o3e06vpqq56c" path="res://assets/black texture.png" id="2_xnrho"]
 [ext_resource type="Texture2D" uid="uid://cxc1sqhwtc7n1" path="res://assets/Backgrounds/Outside/OutsideBackground2.png" id="3_qwf22"]
