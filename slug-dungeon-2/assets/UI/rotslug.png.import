@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c7hd6odkxm436"
-path="res://.godot/imported/ramp.png-4bd8dc15b13d72a14d3732f72e21caf4.ctex"
+uid="uid://dvjo02cf1b0r8"
+path="res://.godot/imported/rotslug.png-2c4ba24f28648c20c041807b2f70d7f2.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/ramp.png"
-dest_files=["res://.godot/imported/ramp.png-4bd8dc15b13d72a14d3732f72e21caf4.ctex"]
+source_file="res://assets/UI/rotslug.png"
+dest_files=["res://.godot/imported/rotslug.png-2c4ba24f28648c20c041807b2f70d7f2.ctex"]
 
 [params]
 

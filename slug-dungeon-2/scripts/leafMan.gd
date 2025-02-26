@@ -1,5 +1,7 @@
 extends CharacterBody2D
 
+var leafItem = preload("res://leafItem.tscn")
+
 # Reference to the AnimatedSprite2D node
 @export var animated_sprite: AnimatedSprite2D
 
@@ -43,12 +45,14 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 
 		isDead = true
 		death_particle.emitting = true
+		
+		var instance = leafItem.instantiate() # Replace with function body.
 			
 		# Make the animated sprite invisible
 		animated_sprite.visible = false
 			
 		# Make the death sprite visible
-		death_sprite.visible = true
+		#death_sprite.visible = true
 			
 		# Stop the looping sound
 		if looping_sound.playing:
@@ -60,6 +64,10 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 			
 		# Disable further collisions (optional)
 		set_collision_mask_value(1, false)  # Disable collision with layer 1 (Player)
+		
+		if get_parent():
+			get_parent().add_child(instance)
+			instance.global_position = global_position
 		
 		# Wait for the death particle effect to finish before removing the creature
 		await get_tree().create_timer(death_particle.lifetime).timeout

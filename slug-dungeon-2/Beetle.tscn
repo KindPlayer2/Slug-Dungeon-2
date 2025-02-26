@@ -1,11 +1,12 @@
-[gd_scene load_steps=29 format=3 uid="uid://bhucm15pwwnoi"]
+[gd_scene load_steps=31 format=3 uid="uid://bhucm15pwwnoi"]
 
-[ext_resource type="Script" path="res://Beetle.gd" id="1_wggy3"]
+[ext_resource type="Script" path="res://scripts/Beetle.gd" id="1_wggy3"]
 [ext_resource type="Texture2D" uid="uid://cdpjnyalm50il" path="res://assets/enemies/BeetleIdle.png" id="2_r7cmb"]
 [ext_resource type="Texture2D" uid="uid://c1u0s711orlgu" path="res://assets/enemies/BeetleAttack.png" id="3_2ux55"]
-[ext_resource type="Texture2D" uid="uid://1sufbmp4ij0q" path="res://assets/redpix.png" id="4_0v0d7"]
+[ext_resource type="Texture2D" uid="uid://1sufbmp4ij0q" path="res://assets/Other/redpix.png" id="4_0v0d7"]
 [ext_resource type="Texture2D" uid="uid://d3vk3vsrui3u" path="res://assets/enemies/deadBeetle.png" id="5_3uaod"]
 [ext_resource type="AudioStream" uid="uid://hjjiy1q67rny" path="res://assets/Sounds/beetleattack.mp3" id="6_5g858"]
+[ext_resource type="Texture2D" uid="uid://cc5aybt3qugpq" path="res://assets/enemies/BeetleBehind.png" id="7_mon0k"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_43x16"]
 atlas = ExtResource("3_2ux55")
@@ -105,24 +106,27 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rnbju"]
-size = Vector2(33.4, 30.3)
+size = Vector2(25.8, 30.3)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_8m33o"]
-size = Vector2(23.3, 30.4)
+size = Vector2(22.7833, 30.4)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7pdbh"]
+size = Vector2(21.0859, 16.2)
 
 [sub_resource type="Curve" id="Curve_8xqqr"]
 max_value = 200.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 1), 0.0, 0.0, 0, 0]
 point_count = 2
 
-[sub_resource type="CurveTexture" id="CurveTexture_bxxih"]
+[sub_resource type="CurveTexture" id="CurveTexture_akyit"]
 curve = SubResource("Curve_8xqqr")
 
 [sub_resource type="Gradient" id="Gradient_pxuou"]
 offsets = PackedFloat32Array(0, 0.153846, 0.897436, 0.953846, 1)
 colors = PackedColorArray(0.890196, 0, 0, 0, 0.507244, 1.26945e-06, 1.92523e-07, 1, 0.266116, 0, 0.0360788, 1, 0.247059, 0, 0.0352941, 0.760784, 0.231373, 0, 0.0352941, 0.411765)
 
-[sub_resource type="GradientTexture1D" id="GradientTexture1D_0hm7c"]
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_5afbs"]
 gradient = SubResource("Gradient_pxuou")
 
 [sub_resource type="Curve" id="Curve_k7a3n"]
@@ -130,7 +134,7 @@ max_value = 100.0
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.99999, 0), 0.0, 0.0, 0, 0, Vector2(1, 100), 0.0, 0.0, 0, 0]
 point_count = 3
 
-[sub_resource type="CurveTexture" id="CurveTexture_csbx3"]
+[sub_resource type="CurveTexture" id="CurveTexture_yssep"]
 width = 400
 curve = SubResource("Curve_k7a3n")
 
@@ -144,27 +148,29 @@ angular_velocity_max = 255.75
 gravity = Vector3(0, 0, 0)
 damping_min = 300.0
 damping_max = 300.0
-damping_curve = SubResource("CurveTexture_csbx3")
+damping_curve = SubResource("CurveTexture_yssep")
 scale_over_velocity_max = 463.32
-color_ramp = SubResource("GradientTexture1D_0hm7c")
+color_ramp = SubResource("GradientTexture1D_5afbs")
 anim_speed_min = 6.42
 anim_speed_max = 6.42
-anim_speed_curve = SubResource("CurveTexture_bxxih")
+anim_speed_curve = SubResource("CurveTexture_akyit")
 anim_offset_min = 0.4595
 anim_offset_max = 0.4595
 
 [node name="Node2D" type="Node2D"]
 
-[node name="StaticBody2D" type="StaticBody2D" parent="." node_paths=PackedStringArray("animated_sprite", "audio_stream_player_2d", "death_particle", "death_sprite", "attackArea", "weakArea") groups=["enemy"]]
-collision_layer = 256
-collision_mask = 256
+[node name="StaticBody2D" type="StaticBody2D" parent="." node_paths=PackedStringArray("animated_sprite", "audio_stream_player_2d", "death_particle", "death_sprite", "behind_sprite", "attackArea", "weakArea", "deadtimer") groups=["enemy"]]
+collision_layer = 270
+collision_mask = 270
 script = ExtResource("1_wggy3")
 animated_sprite = NodePath("Idle")
 audio_stream_player_2d = NodePath("AudioStreamPlayer2D")
 death_particle = NodePath("GPUParticles2D")
 death_sprite = NodePath("Sprite2D")
+behind_sprite = NodePath("behind")
 attackArea = NodePath("Attack")
 weakArea = NodePath("Weakness")
+deadtimer = NodePath("../Timer")
 
 [node name="Idle" type="AnimatedSprite2D" parent="StaticBody2D"]
 position = Vector2(101, 108)
@@ -174,7 +180,7 @@ animation = &"idle"
 frame_progress = 0.586606
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
-position = Vector2(104.5, 92.75)
+position = Vector2(89.5, 92.75)
 scale = Vector2(5, 5)
 shape = SubResource("RectangleShape2D_rnbju")
 
@@ -193,8 +199,8 @@ collision_layer = 15
 collision_mask = 15
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D/Weakness"]
-position = Vector2(27.8, 15.8)
-shape = SubResource("RectangleShape2D_8m33o")
+position = Vector2(33.5227, 22.9)
+shape = SubResource("RectangleShape2D_7pdbh")
 
 [node name="GPUParticles2D" type="GPUParticles2D" parent="StaticBody2D"]
 position = Vector2(104.334, 104)
@@ -221,5 +227,16 @@ scale = Vector2(5, 5)
 stream = ExtResource("6_5g858")
 volume_db = 12.0
 
+[node name="behind" type="Sprite2D" parent="StaticBody2D"]
+visible = false
+position = Vector2(101, 108)
+scale = Vector2(5, 5)
+texture = ExtResource("7_mon0k")
+
+[node name="Timer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="area_entered" from="StaticBody2D/Attack" to="StaticBody2D" method="_on_attack_area_entered"]
 [connection signal="area_entered" from="StaticBody2D/Weakness" to="StaticBody2D" method="_on_weakness_area_entered"]
+[connection signal="area_exited" from="StaticBody2D/Weakness" to="StaticBody2D" method="_on_weakness_area_exited"]
+[connection signal="timeout" from="Timer" to="StaticBody2D" method="_on_timer_timeout"]

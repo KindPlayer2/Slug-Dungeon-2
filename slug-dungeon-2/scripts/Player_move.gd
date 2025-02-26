@@ -59,6 +59,10 @@ var head_left_original_positions: Array[Vector2]
 
 @onready var health_bar: ProgressBar = $HealthBar
 
+@export var Inventory: Control
+
+@export var camera:Camera2D
+
 # Track whether the player was on the wall in the previous frame
 var was_on_wall := false
 
@@ -77,6 +81,24 @@ func _input(event: InputEvent) -> void:
 		
 	if event.is_action_pressed("Attack"):
 		attack()
+		
+	if event.is_action_pressed("Inventory"):  # Assuming "ui_inventory" is the action for the "E" key
+		toggle_inventory()
+
+func toggle_inventory():
+	if get_tree().paused:
+		# If the game is paused, resume it and hide the inventory
+		get_tree().paused = false
+		Inventory.visible = false
+	else:
+		# If the game is not paused, pause it and show the inventory
+		get_tree().paused = true
+		Inventory.visible = true
+		# Optionally, you can center the inventory on the screen
+		#Inventory.rect_position = (get_viewport().size - Inventory.rect_size) / 2
+		#center_inventory_on_screen()
+		
+##Inventory.position = (viewport_size - Inventory.size) / 2
 		
 var initial_body_right_position: Vector2
 var initial_body_right_velocity: Vector2
@@ -253,10 +275,13 @@ func _on_attackTimer_timeout():
 	AttackArea.monitorable = false
 	AttackArea.monitoring = false
 	isAttacking = false
-	AttackArea.scale = Vector2(0.5,0.5)
+	AttackArea.scale = Vector2(0.1,0.1)
 
 
 func _physics_process(delta: float) -> void:
+	
+	Inventory.global_position = camera.global_position
+	
 	if health <= 0 and is_alive:
 		died()  # Call died() only once when health drops to 0
 		return
@@ -401,7 +426,7 @@ func set_player_visible(is_facing_right: bool):
 	left_facing_softbody.visible = not is_facing_right
 
 func _on_area_2d_area_entered(area: Area2D) -> void:
-	if area.is_in_group("enemy"):
+	if area.is_in_group("enemy") and !area.get_parent().isDead:
 		# Determine the knockback direction based on the player's facing direction
 		var knockback_direction: Vector2
 		if right_facing_softbody.visible:
