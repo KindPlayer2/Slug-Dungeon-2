@@ -30,8 +30,9 @@ folder_colors={
 "res://assets/Player/": "blue",
 "res://assets/Sounds/": "teal",
 "res://assets/Sounds/Player_Sounds/": "blue",
-"res://assets/UI/": "green",
+"res://assets/UI/": "yellow",
 "res://assets/enemies/": "green",
+"res://assets/terrain/": "green",
 "res://samples/": "orange",
 "res://scripts/": "yellow"
 }
