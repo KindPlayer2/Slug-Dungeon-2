@@ -1,14 +1,21 @@
-[gd_scene load_steps=3 format=3 uid="uid://bubj8n3lms553"]
+[gd_scene load_steps=6 format=3 uid="uid://bubj8n3lms553"]
 
+[ext_resource type="Script" path="res://leaf_item.gd" id="1_gmlfw"]
 [ext_resource type="Texture2D" uid="uid://ctn8u4nxu7cw6" path="res://assets/enemies/deadLeaf.png" id="1_hp4ko"]
+[ext_resource type="Resource" uid="uid://c3457itlsf0n5" path="res://Inventory/Items/LeafItem.tres" id="2_jv6bf"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_iexhc"]
+size = Vector2(120, 85)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ssur7"]
 size = Vector2(120, 85)
 
 [node name="RigidBody2D" type="RigidBody2D"]
 position = Vector2(-15, -13)
 collision_layer = 2049
 collision_mask = 2049
+script = ExtResource("1_gmlfw")
+item = ExtResource("2_jv6bf")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(18, 19)
@@ -18,3 +25,11 @@ texture = ExtResource("1_hp4ko")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(13, 11.5)
 shape = SubResource("RectangleShape2D_iexhc")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(13, 11.5)
+shape = SubResource("RectangleShape2D_ssur7")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

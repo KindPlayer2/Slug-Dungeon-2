@@ -1,8 +1,9 @@
-[gd_scene load_steps=78 format=3 uid="uid://bc626pe7caemo"]
+[gd_scene load_steps=81 format=3 uid="uid://bc626pe7caemo"]
 
-[ext_resource type="Script" uid="uid://blqh2t264vrl3" path="res://scripts/Player_move.gd" id="1_12l3o"]
+[ext_resource type="Script" path="res://scripts/Player_move.gd" id="1_12l3o"]
+[ext_resource type="Resource" uid="uid://cnrbac6hsqhoh" path="res://Inventory/playerinv.tres" id="2_le0hd"]
 [ext_resource type="Texture2D" uid="uid://bauu1ffa68cs8" path="res://assets/Player/slug.png" id="2_sarpv"]
-[ext_resource type="Script" uid="uid://f52de6asqp5k" path="res://addons/softbody2d/softbody2d.gd" id="3_nvep6"]
+[ext_resource type="Script" path="res://addons/softbody2d/softbody2d.gd" id="3_nvep6"]
 [ext_resource type="Texture2D" uid="uid://d4lkwni1fiw7c" path="res://assets/Player/slug - Copy.png" id="4_dpi3m"]
 [ext_resource type="AudioStream" uid="uid://boya05rm035ec" path="res://assets/Sounds/Player_Sounds/jump_41g16G8A.mp3" id="5_fp1vq"]
 [ext_resource type="AudioStream" uid="uid://cgl3k2xgokbub" path="res://assets/Sounds/Player_Sounds/charge_JCiJIkR7.mp3" id="6_01qgf"]
@@ -13,7 +14,7 @@
 [ext_resource type="AudioStream" uid="uid://snvvw5bk2mt7" path="res://assets/Sounds/Player_Sounds/Track5_VoiceAudio.mp3" id="11_gdtwq"]
 [ext_resource type="AudioStream" uid="uid://cg4bocu1i0gq8" path="res://assets/Sounds/Player_Sounds/Ahhhh.mp3" id="12_imy68"]
 [ext_resource type="Texture2D" uid="uid://f0ci8iuoxbbf" path="res://assets/Other/purpix.png" id="13_s1bnl"]
-[ext_resource type="Script" uid="uid://clt25staw6x2i" path="res://scripts/camera_2d.gd" id="14_vssje"]
+[ext_resource type="Script" path="res://scripts/camera_2d.gd" id="14_vssje"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_conrc"]
 radius = 23.933
@@ -444,19 +445,31 @@ point_count = 3
 width = 400
 curve = SubResource("Curve_8517k")
 
+[sub_resource type="Curve" id="Curve_3wa1e"]
+_data = [Vector2(0.165919, 0.10989), 0.0, 0.0, 0, 0, Vector2(0.887892, 1), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_n03up"]
+curve = SubResource("Curve_3wa1e")
+
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_43o1q"]
 lifetime_randomness = 1.0
-direction = Vector3(0, 0, 0)
+particle_flag_rotate_y = true
+particle_flag_disable_z = true
+velocity_pivot = Vector3(50, 50, 50)
+direction = Vector3(50, 50, 50)
 spread = 180.0
 initial_velocity_max = 250.0
-angular_velocity_min = -1.60933e-05
-angular_velocity_max = 255.75
+angular_velocity_min = 70.0
+angular_velocity_max = 360.0
+radial_velocity_curve = SubResource("CurveTexture_n03up")
 gravity = Vector3(0, 0, 0)
-damping_min = 300.0
-damping_max = 300.0
 damping_curve = SubResource("CurveTexture_inptb")
+scale_max = 3.0
 scale_over_velocity_max = 463.32
 color_ramp = SubResource("GradientTexture1D_y4qow")
+hue_variation_min = -2.23517e-08
+hue_variation_max = -2.23517e-08
 anim_speed_min = 6.42
 anim_speed_max = 6.42
 anim_speed_curve = SubResource("CurveTexture_mt8ge")
@@ -492,6 +505,7 @@ collision_mask = 2
 floor_stop_on_slope = false
 floor_block_on_wall = false
 script = ExtResource("1_12l3o")
+inv = ExtResource("2_le0hd")
 jump_sound = NodePath("Jump")
 charge_sound = NodePath("Charge")
 walk_sound = NodePath("Walk")
@@ -579,7 +593,7 @@ metadata/_local_pose_override_enabled_ = true
 
 [node name="Bone-1" type="Bone2D" parent="SoftBodyRight/Skeleton2D"]
 position = Vector2(5.98619, 24.1816)
-rotation = -0.142644
+rotation = -0.142645
 scale = Vector2(0.999997, 0.999997)
 rest = Transform2D(0.989843, -0.142163, 0.142163, 0.989843, 5.98619, 24.1816)
 auto_calculate_length_and_angle = false
@@ -663,8 +677,7 @@ metadata/_local_pose_override_enabled_ = true
 
 [node name="Bone-7" type="Bone2D" parent="SoftBodyRight/Skeleton2D"]
 position = Vector2(15.9091, 22.5417)
-rotation = 0.107472
-scale = Vector2(1, 1)
+rotation = 0.107473
 rest = Transform2D(0.994231, 0.107259, -0.107259, 0.994231, 15.9091, 22.5417)
 auto_calculate_length_and_angle = false
 length = 5.0
@@ -692,6 +705,7 @@ metadata/_local_pose_override_enabled_ = true
 [node name="Bone-9" type="Bone2D" parent="SoftBodyRight/Skeleton2D"]
 position = Vector2(15.1135, 30.2565)
 rotation = -1.55062
+scale = Vector2(1, 1)
 rest = Transform2D(0.0201575, -0.999797, 0.999797, 0.0201575, 15.1135, 30.2565)
 auto_calculate_length_and_angle = false
 length = 5.0
@@ -718,7 +732,7 @@ metadata/_local_pose_override_enabled_ = true
 
 [node name="Bone-11" type="Bone2D" parent="SoftBodyRight/Skeleton2D"]
 position = Vector2(19.0077, 22.876)
-rotation = 1.47743
+rotation = 1.47742
 scale = Vector2(0.999998, 0.999998)
 rest = Transform2D(0.0932372, 0.995644, -0.995644, 0.0932372, 19.0077, 22.876)
 auto_calculate_length_and_angle = false
@@ -789,7 +803,6 @@ metadata/_local_pose_override_enabled_ = true
 [node name="Bone-16" type="Bone2D" parent="SoftBodyRight/Skeleton2D"]
 position = Vector2(24.0015, 22.9445)
 rotation = 1.53878
-scale = Vector2(1, 1)
 rest = Transform2D(0.0320037, 0.999488, -0.999488, 0.0320037, 24.0015, 22.9445)
 auto_calculate_length_and_angle = false
 length = 5.0
@@ -830,7 +843,7 @@ metadata/_local_pose_override_enabled_ = true
 
 [node name="Bone-19" type="Bone2D" parent="SoftBodyRight/Skeleton2D"]
 position = Vector2(28.8158, 17.6067)
-rotation = 2.30467
+rotation = 2.30468
 scale = Vector2(0.999995, 0.999995)
 rest = Transform2D(-0.669748, 0.742588, -0.742588, -0.669748, 28.8158, 17.6067)
 auto_calculate_length_and_angle = false
@@ -2260,7 +2273,7 @@ metadata/_local_pose_override_enabled_ = true
 
 [node name="Bone-7" type="Bone2D" parent="SoftBodyLeft/Skeleton2D"]
 position = Vector2(5.7826, 30.6275)
-rotation = -0.588022
+rotation = -0.588023
 scale = Vector2(0.997764, 0.997764)
 rest = Transform2D(0.832038, -0.554719, 0.554719, 0.832038, 5.7826, 30.6275)
 auto_calculate_length_and_angle = false
@@ -3962,14 +3975,15 @@ offset_bottom = -75.0
 position = Vector2(-0.999977, -6.99999)
 scale = Vector2(5, 5)
 emitting = false
-amount = 1000
-texture = ExtResource("10_wtkue")
-lifetime = 0.5
-one_shot = true
-speed_scale = 2.0
-explosiveness = 1.0
-randomness = 0.3
+amount = 3000
 process_material = SubResource("ParticleProcessMaterial_43o1q")
+texture = ExtResource("10_wtkue")
+one_shot = true
+explosiveness = 1.0
+randomness = 1.0
+trail_lifetime = 0.1
+trail_sections = 2
+trail_section_subdivisions = 2
 
 [node name="hurt" type="AudioStreamPlayer2D" parent="."]
 stream = ExtResource("11_gdtwq")
@@ -3984,13 +3998,13 @@ position = Vector2(-4, 14)
 scale = Vector2(5, 5)
 emitting = false
 amount = 200
+process_material = SubResource("ParticleProcessMaterial_p0m80")
 texture = ExtResource("13_s1bnl")
 lifetime = 0.5
 one_shot = true
 speed_scale = 2.0
 explosiveness = 0.5
 trail_lifetime = 0.1
-process_material = SubResource("ParticleProcessMaterial_p0m80")
 
 [node name="Camera2D" type="Camera2D" parent="." node_paths=PackedStringArray("playa")]
 position = Vector2(0, -46)

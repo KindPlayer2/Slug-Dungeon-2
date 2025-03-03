@@ -1,8 +1,8 @@
 [gd_scene load_steps=20 format=3 uid="uid://mt3n5mdme4yk"]
 
-[ext_resource type="Script" uid="uid://g6h1df7qf165" path="res://scripts/leaf_man.gd" id="1_inaip"]
+[ext_resource type="Script" path="res://scripts/leaf_man.gd" id="1_inaip"]
 [ext_resource type="Texture2D" uid="uid://bbfbpcfkrgncv" path="res://assets/enemies/leafman.png" id="1_y5pic"]
-[ext_resource type="Script" uid="uid://cdlj8dg7w7xu4" path="res://scripts/leafMan.gd" id="2_khhyd"]
+[ext_resource type="Script" path="res://scripts/leafMan.gd" id="2_khhyd"]
 [ext_resource type="AudioStream" uid="uid://duhks7l3ejmih" path="res://assets/Sounds/leafmanvoice.mp3" id="4_rbxyd"]
 [ext_resource type="AudioStream" uid="uid://nt0pu0srxqen" path="res://assets/Sounds/leafmandeath_AY13gqEK.mp3" id="5_0jgif"]
 [ext_resource type="Texture2D" uid="uid://ctn8u4nxu7cw6" path="res://assets/enemies/deadLeaf.png" id="6_ycmsm"]
@@ -118,13 +118,13 @@ texture = ExtResource("6_ycmsm")
 position = Vector2(16.6667, 18)
 emitting = false
 amount = 1000
+process_material = SubResource("ParticleProcessMaterial_aubxj")
 texture = ExtResource("7_gk04c")
 lifetime = 3.0
 one_shot = true
 speed_scale = 2.0
 explosiveness = 1.0
 randomness = 0.3
-process_material = SubResource("ParticleProcessMaterial_aubxj")
 
 [node name="Area2D" type="Area2D" parent="CharacterBody2D" groups=["health_item"]]
 collision_mask = 257

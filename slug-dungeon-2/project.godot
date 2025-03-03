@@ -12,7 +12,7 @@ config_version=5
 
 config/name="Slug Dungeon 2"
 run/main_scene="res://softbody.tscn"
-config/features=PackedStringArray("4.4", "Forward Plus")
+config/features=PackedStringArray("4.3", "Forward Plus")
 config/icon="res://icon.svg"
 
 [editor_plugins]
@@ -22,6 +22,9 @@ enabled=PackedStringArray("res://addons/softbody2d/plugin.cfg")
 [file_customization]
 
 folder_colors={
+"res://Fonts/": "orange",
+"res://Inventory/": "yellow",
+"res://Inventory/Items/": "orange",
 "res://addons/": "orange",
 "res://assets/": "red",
 "res://assets/Backgrounds/": "yellow",
@@ -33,8 +36,9 @@ folder_colors={
 "res://assets/UI/": "yellow",
 "res://assets/enemies/": "green",
 "res://assets/terrain/": "green",
-"res://samples/": "orange",
-"res://scripts/": "yellow"
+"res://samples/": "green",
+"res://samples/softbody2d/": "teal",
+"res://scripts/": "teal"
 }
 
 [global_group]
@@ -42,6 +46,8 @@ folder_colors={
 health_item=""
 enemy=""
 Attack=""
+Player=""
+Death=""
 
 [input]
 

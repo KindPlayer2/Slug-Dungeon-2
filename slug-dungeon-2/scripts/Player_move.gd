@@ -15,6 +15,8 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 # Track whether the player is in the air
 var is_in_air := false
 
+@export var inv: Inv
+
 @export var isAttacking:bool = false
 
 # Sounds
@@ -424,8 +426,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	elif area.is_in_group("health_item") && health < 6:
 		health += 1
 		health_bar.health = health
-	#if area.is_in_group("item"):
-		#var item = area.get_item()  # Assume the item has a method to return its data
-		#if inventory_data.add_item(item):
-			#area.queue_free()  # Remove the item from the game world
-			#update_inventory_ui()  # Update the inventory UI
+	if area.is_in_group("Death"):
+		died()
+		
+func collect(item):
+	inv.insert(item)
