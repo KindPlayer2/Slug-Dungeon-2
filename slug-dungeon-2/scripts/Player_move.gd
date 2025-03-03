@@ -424,8 +424,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	elif area.is_in_group("health_item") && health < 6:
 		health += 1
 		health_bar.health = health
-	if area.is_in_group("item"):
-		var item = area.get_item()  # Assume the item has a method to return its data
+	#if area.is_in_group("item"):
+		#var item = area.get_item()  # Assume the item has a method to return its data
 		#if inventory_data.add_item(item):
 			#area.queue_free()  # Remove the item from the game world
 			#update_inventory_ui()  # Update the inventory UI
