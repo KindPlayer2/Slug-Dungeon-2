@@ -1,5 +1,6 @@
-[gd_scene load_steps=54 format=4 uid="uid://cwiqe7evyuxq6"]
+[gd_scene load_steps=55 format=4 uid="uid://cwiqe7evyuxq6"]
 
+[ext_resource type="Script" uid="uid://bsxqe46a5w72g" path="res://inventory.gd" id="1_e3raj"]
 [ext_resource type="Texture2D" uid="uid://caacnhontu1sx" path="res://assets/UI/InventorySlug.png" id="1_ypyjh"]
 [ext_resource type="Texture2D" uid="uid://buqcasyruau0a" path="res://assets/UI/buttonHover.png" id="2_mkpwl"]
 [ext_resource type="Texture2D" uid="uid://dfkhf382aer23" path="res://assets/UI/ButtonHoverPressed.png" id="2_v3rgi"]
@@ -1702,15 +1703,18 @@ animations = [{
 "speed": 24.0
 }]
 
-[node name="Control" type="Control"]
+[node name="CanvasLayer" type="CanvasLayer"]
+
+[node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_e3raj")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="."]
+[node name="NinePatchRect" type="NinePatchRect" parent="Control"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -1725,7 +1729,7 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("1_ypyjh")
 
-[node name="ItemSlot1" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot1" type="Button" parent="Control/NinePatchRect"]
 layout_mode = 0
 offset_left = 93.0
 offset_top = 327.0
@@ -1735,7 +1739,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot2" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot2" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 168.0
 offset_top = 327.0
 offset_right = 234.0
@@ -1744,7 +1749,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot3" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot3" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 243.0
 offset_top = 327.0
 offset_right = 309.0
@@ -1753,7 +1759,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot4" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot4" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 318.0
 offset_top = 327.0
 offset_right = 384.0
@@ -1762,7 +1769,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot5" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot5" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 393.0
 offset_top = 327.0
 offset_right = 459.0
@@ -1771,7 +1779,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot6" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot6" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 468.0
 offset_top = 327.0
 offset_right = 534.0
@@ -1780,7 +1789,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot7" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot7" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 543.0
 offset_top = 327.0
 offset_right = 609.0
@@ -1789,7 +1799,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot8" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot8" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 618.0
 offset_top = 327.0
 offset_right = 684.0
@@ -1798,7 +1809,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot9" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot9" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 693.0
 offset_top = 327.0
 offset_right = 759.0
@@ -1807,7 +1819,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot10" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot10" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 768.0
 offset_top = 327.0
 offset_right = 834.0
@@ -1816,7 +1829,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot11" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot11" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 843.0
 offset_top = 327.0
 offset_right = 909.0
@@ -1825,7 +1839,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot12" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot12" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 918.0
 offset_top = 327.0
 offset_right = 984.0
@@ -1834,7 +1849,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot13" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot13" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 993.0
 offset_top = 327.0
 offset_right = 1059.0
@@ -1843,7 +1859,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot14" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot14" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 93.0
 offset_top = 402.0
 offset_right = 159.0
@@ -1852,7 +1869,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot15" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot15" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 168.0
 offset_top = 402.0
 offset_right = 234.0
@@ -1861,7 +1879,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot16" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot16" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 243.0
 offset_top = 402.0
 offset_right = 309.0
@@ -1870,7 +1889,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot17" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot17" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 318.0
 offset_top = 402.0
 offset_right = 384.0
@@ -1879,7 +1899,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot18" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot18" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 393.0
 offset_top = 402.0
 offset_right = 459.0
@@ -1888,7 +1909,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot19" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot19" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 468.0
 offset_top = 402.0
 offset_right = 534.0
@@ -1897,7 +1919,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot20" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot20" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 543.0
 offset_top = 402.0
 offset_right = 609.0
@@ -1906,7 +1929,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot21" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot21" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 618.0
 offset_top = 402.0
 offset_right = 684.0
@@ -1915,7 +1939,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot22" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot22" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 693.0
 offset_top = 402.0
 offset_right = 759.0
@@ -1924,7 +1949,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot23" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot23" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 768.0
 offset_top = 402.0
 offset_right = 834.0
@@ -1933,7 +1959,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot24" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot24" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 843.0
 offset_top = 402.0
 offset_right = 909.0
@@ -1942,7 +1969,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot25" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot25" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 918.0
 offset_top = 402.0
 offset_right = 984.0
@@ -1951,7 +1979,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot26" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot26" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 993.0
 offset_top = 402.0
 offset_right = 1059.0
@@ -1960,7 +1989,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot27" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot27" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 93.0
 offset_top = 477.0
 offset_right = 159.0
@@ -1969,7 +1999,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot28" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot28" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 168.0
 offset_top = 477.0
 offset_right = 234.0
@@ -1978,7 +2009,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot29" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot29" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 243.0
 offset_top = 477.0
 offset_right = 309.0
@@ -1987,7 +2019,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot30" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot30" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 318.0
 offset_top = 477.0
 offset_right = 384.0
@@ -1996,7 +2029,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot31" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot31" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 393.0
 offset_top = 477.0
 offset_right = 459.0
@@ -2005,7 +2039,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot32" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot32" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 468.0
 offset_top = 477.0
 offset_right = 534.0
@@ -2014,7 +2049,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot33" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot33" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 543.0
 offset_top = 477.0
 offset_right = 609.0
@@ -2023,7 +2059,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot34" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot34" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 618.0
 offset_top = 477.0
 offset_right = 684.0
@@ -2032,7 +2069,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot35" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot35" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 693.0
 offset_top = 477.0
 offset_right = 759.0
@@ -2041,7 +2079,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot36" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot36" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 768.0
 offset_top = 477.0
 offset_right = 834.0
@@ -2050,7 +2089,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot37" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot37" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 843.0
 offset_top = 477.0
 offset_right = 909.0
@@ -2059,7 +2099,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot38" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot38" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 918.0
 offset_top = 477.0
 offset_right = 984.0
@@ -2068,7 +2109,8 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="ItemSlot39" type="Button" parent="NinePatchRect"]
+[node name="ItemSlot39" type="Button" parent="Control/NinePatchRect"]
+layout_mode = 0
 offset_left = 993.0
 offset_top = 477.0
 offset_right = 1059.0
@@ -2077,7 +2119,7 @@ theme = SubResource("Theme_1lrsm")
 text = "
 "
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Control/NinePatchRect"]
 position = Vector2(311, 161)
 scale = Vector2(3.5, 3.5)
 sprite_frames = SubResource("SpriteFrames_8mats")

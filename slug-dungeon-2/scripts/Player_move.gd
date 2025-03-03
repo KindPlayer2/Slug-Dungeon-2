@@ -59,8 +59,6 @@ var head_left_original_positions: Array[Vector2]
 
 @onready var health_bar: ProgressBar = $HealthBar
 
-@export var Inventory: Control
-
 @export var camera:Camera2D
 
 # Track whether the player was on the wall in the previous frame
@@ -81,24 +79,6 @@ func _input(event: InputEvent) -> void:
 		
 	if event.is_action_pressed("Attack"):
 		attack()
-		
-	if event.is_action_pressed("Inventory"):  # Assuming "ui_inventory" is the action for the "E" key
-		toggle_inventory()
-
-func toggle_inventory():
-	if get_tree().paused:
-		# If the game is paused, resume it and hide the inventory
-		get_tree().paused = false
-		#Inventory.visible = false
-	else:
-		# If the game is not paused, pause it and show the inventory
-		get_tree().paused = true
-		#Inventory.visible = true
-		# Optionally, you can center the inventory on the screen
-		#Inventory.rect_position = (get_viewport().size - Inventory.rect_size) / 2
-		#center_inventory_on_screen()
-		
-##Inventory.position = (viewport_size - Inventory.size) / 2
 		
 var initial_body_right_position: Vector2
 var initial_body_right_velocity: Vector2
@@ -376,7 +356,7 @@ func _physics_process(delta: float) -> void:
 			_last_wall_tangent = tangent
 
 			velocity += tangent * WallDirection * SPEED * delta
-			velocity = velocity.limit_length(SPEED) * 1.3
+			velocity = velocity.limit_length(SPEED) * 1.2
 		else:
 			if direction:
 				velocity.x = direction * SPEED
@@ -444,3 +424,8 @@ func _on_area_2d_area_entered(area: Area2D) -> void:
 	elif area.is_in_group("health_item") && health < 6:
 		health += 1
 		health_bar.health = health
+	if area.is_in_group("item"):
+		var item = area.get_item()  # Assume the item has a method to return its data
+		#if inventory_data.add_item(item):
+			#area.queue_free()  # Remove the item from the game world
+			#update_inventory_ui()  # Update the inventory UI
