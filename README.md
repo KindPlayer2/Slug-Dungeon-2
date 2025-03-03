@@ -16,6 +16,7 @@ In **Slug Dungeon 2**, you take on the role of a softbody slug with the ability 
 - **Slug Town**: A cozy hub town where you can:
   - Buy items to aid your journey.
   - Chat with your **Accountant** (yes, slugs need financial advice too!).
+  - Seek legal advice from your sluglicitor.
   - Prepare for your next dungeon dive.
 - **Insect Enemies**: Battle a variety of creepy-crawly foes, from beetles to ants, each with unique behaviors and challenges.
 - **Educational Focus**: The game is designed to teach players about the fascinating world of slugs while they play.
