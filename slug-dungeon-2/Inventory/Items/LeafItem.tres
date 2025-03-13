@@ -1,9 +1,0 @@
-[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://c3457itlsf0n5"]
-
-[ext_resource type="Script" path="res://inventory_item.gd" id="1_hh3ed"]
-[ext_resource type="Texture2D" uid="uid://ctn8u4nxu7cw6" path="res://assets/enemies/deadLeaf.png" id="2_b8qvy"]
-
-[resource]
-script = ExtResource("1_hh3ed")
-name = "Leaf"
-texture = ExtResource("2_b8qvy")

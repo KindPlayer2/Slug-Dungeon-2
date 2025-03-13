@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://bfihm68jgohae"]
+
+[ext_resource type="Script" path="res://leaf_item.gd" id="1_5qnxl"]
+[ext_resource type="Texture2D" uid="uid://d3vk3vsrui3u" path="res://assets/enemies/deadBeetle.png" id="1_8ake1"]
+[ext_resource type="Resource" uid="uid://d4eo5o2vfmjgn" path="res://Inventory/Items/BeetleItem.tres" id="2_v2ubb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_8f4o6"]
+radius = 10.6
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fmybd"]
+radius = 64.0078
+
+[node name="RigidBody2D" type="RigidBody2D"]
+position = Vector2(-107, -130)
+collision_layer = 2049
+collision_mask = 2049
+script = ExtResource("1_5qnxl")
+item = ExtResource("2_v2ubb")
+
+[node name="BeetleHead" type="Sprite2D" parent="."]
+position = Vector2(106, 108)
+scale = Vector2(5, 5)
+texture = ExtResource("1_8ake1")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(105, 126)
+scale = Vector2(5, 5)
+shape = SubResource("CircleShape2D_8f4o6")
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(106, 125)
+shape = SubResource("CircleShape2D_fmybd")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]

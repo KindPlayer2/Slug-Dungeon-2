@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="InvItem" load_steps=3 format=3 uid="uid://d4eo5o2vfmjgn"]
+
+[ext_resource type="Script" path="res://inventory_item.gd" id="1_xx7ji"]
+[ext_resource type="Texture2D" uid="uid://d3vk3vsrui3u" path="res://assets/enemies/deadBeetle.png" id="2_xprds"]
+
+[resource]
+script = ExtResource("1_xx7ji")
+name = "Beetle"
+description = "Sharp horned armour of a beetle, used in crafting."
+texture = ExtResource("2_xprds")
